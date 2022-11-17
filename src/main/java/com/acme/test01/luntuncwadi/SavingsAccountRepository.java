@@ -2,7 +2,6 @@ package com.acme.test01.luntuncwadi;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
-import java.util.Set;
 
 public class SavingsAccountRepository implements  AccountRepository{
 
@@ -20,18 +19,17 @@ public class SavingsAccountRepository implements  AccountRepository{
         return repository;
     }
     @Override
-    public void withdraw(String accountNum, double amountToWithdraws) throws Exception {
-        BigDecimal amountToWithdraw =null;
+    public void withdraw(Long accountNum, BigDecimal amountToWithdraw) throws Exception {
         Account account = SystemDB.getSystemDB().findByAccountNum(accountNum);
         if(account !=null){
-            if( account instanceof CurrentAccount){
-                BigDecimal minlimit = BigDecimal.valueOf(account.getBalance() -Double.parseDouble(String.valueOf(amountToWithdraw)));
+            if( account instanceof SavingsAccount){
+                System.out.println("account B "+ account.getBalance());
+                BigDecimal minlimit = account.getBalance().subtract(amountToWithdraw);
                 if(minlimit.compareTo(BigDecimal.valueOf(1000))<0){
-                    throw  new Exception("");
+                    throw  new Exception("amount too much");
                 }else {
-                    systemDB.remove(account);
-                    account.setBalance(account.getBalance() -Double.parseDouble(String.valueOf(amountToWithdraw)));
-                    systemDB.add(account);
+                    account.setBalance(account.getBalance().subtract(amountToWithdraw));
+                    System.out.println("New Balance = "+ account.getBalance());
                     System.out.println("Success");
                     ;
                 }
@@ -45,8 +43,4 @@ public class SavingsAccountRepository implements  AccountRepository{
         }
     }
 
-    @Override
-    public Set<Account> getAll() {
-        return systemDB.getAccounts();
-    }
 }

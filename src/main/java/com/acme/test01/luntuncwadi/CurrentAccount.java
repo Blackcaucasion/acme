@@ -1,17 +1,19 @@
 package com.acme.test01.luntuncwadi;
 
+import java.math.BigDecimal;
+
 public class CurrentAccount extends Account{
-    private double overdraft;
-    public CurrentAccount(int customerNum, String accountNum, double balance,double overdraft) {
+    private BigDecimal overdraft;
+    public CurrentAccount(Long customerNum, Long accountNum, BigDecimal balance,BigDecimal overdraft) {
         super(customerNum, accountNum, balance);
         this.overdraft =overdraft;
     }
 
-    public double getOverdraft() {
+    public BigDecimal getOverdraft() {
         return overdraft;
     }
 
-    public void setOverdraft(double overdraft) {
+    public void setOverdraft(BigDecimal overdraft) {
         this.overdraft = overdraft;
     }
 

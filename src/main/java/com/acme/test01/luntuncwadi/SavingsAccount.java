@@ -1,8 +1,10 @@
 package com.acme.test01.luntuncwadi;
 
+import java.math.BigDecimal;
+
 public class SavingsAccount extends  Account{
 
-    public SavingsAccount(int customerNum, String accountNum, double balance) {
+    public SavingsAccount(Long customerNum, Long accountNum, BigDecimal balance) {
         super(customerNum, accountNum, balance);
     }
 

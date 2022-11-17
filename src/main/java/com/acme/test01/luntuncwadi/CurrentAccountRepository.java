@@ -2,7 +2,6 @@ package com.acme.test01.luntuncwadi;
 
 import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
-import java.util.Set;
 
 public class CurrentAccountRepository implements AccountRepository{
     private  static CurrentAccountRepository repository =null;
@@ -17,20 +16,17 @@ public class CurrentAccountRepository implements AccountRepository{
         return  repository;
     }
     @Override
-    public void withdraw(String accountNum, double amountToWithdraws) throws Exception {
-        BigDecimal amountToWithdraw =null;
+    public void withdraw(Long accountNum, BigDecimal amountToWithdraw) throws Exception {
         Account account = SystemDB.getSystemDB().findByAccountNum(accountNum);
         if(account !=null){
             if( account instanceof CurrentAccount){
-                BigDecimal maxlimit = BigDecimal.valueOf(account.getBalance()+((CurrentAccount) account).getOverdraft());
+                BigDecimal maxlimit = account.getBalance().add(((CurrentAccount) account).getOverdraft());
                 if(amountToWithdraw.compareTo(maxlimit) >0){
-                    throw  new Exception("");
+                    throw  new Exception("wrong amount ");
                 }else {
-                    systemDB.remove(account);
-                    account.setBalance(account.getBalance() -Double.parseDouble(String.valueOf(amountToWithdraw)));
-                    systemDB.add(account);
+                    account.setBalance(account.getBalance().subtract(amountToWithdraw));
+                    System.out.println("New Balance = "+ account.getBalance());
                     System.out.println("Success");
-                    ;
                 }
 
             }else {
@@ -43,8 +39,4 @@ public class CurrentAccountRepository implements AccountRepository{
 
     }
 
-    @Override
-    public Set<Account> getAll() {
-        return systemDB.getAccounts();
-    }
 }

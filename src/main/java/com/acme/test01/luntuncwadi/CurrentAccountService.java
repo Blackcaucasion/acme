@@ -1,6 +1,7 @@
 package com.acme.test01.luntuncwadi;
 
 import javax.security.auth.login.AccountNotFoundException;
+import java.math.BigDecimal;
 
 public class CurrentAccountService implements AccountService{
 
@@ -18,7 +19,8 @@ public class CurrentAccountService implements AccountService{
         return service;
     }
     @Override
-    public void withdraw(Long accountId, int amountToWithdraw) throws AccountNotFoundException {
+    public void withdraw(Long accountId, BigDecimal amountToWithdraw) throws Exception {
+        repository.withdraw(accountId,amountToWithdraw);
 
     }
 }

@@ -1,8 +1,7 @@
 package com.acme.test01.luntuncwadi;
 
-import java.util.Set;
+import java.math.BigDecimal;
 
 public interface AccountRepository {
-    void withdraw(String accountNum, double amountToWithdraw) throws Exception;
-    Set<Account> getAll();
+    void withdraw(Long accountNum, BigDecimal amountToWithdraw) throws Exception;
 }

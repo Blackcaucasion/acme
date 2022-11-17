@@ -1,37 +1,39 @@
 package com.acme.test01.luntuncwadi;
 
-public abstract class Account {
-    int customerNum;
-    String accountNum;
-    double balance;
+import java.math.BigDecimal;
 
-    public Account(int customerNum, String accountNum, double balance) {
+public abstract class Account {
+    Long customerNum;
+    Long accountNum;
+    BigDecimal balance;
+
+    public Account(Long customerNum, Long accountNum, BigDecimal balance) {
         this.customerNum = customerNum;
         this.accountNum = accountNum;
         this.balance = balance;
     }
 
-    public int getCustomerNum() {
+    public Long getCustomerNum() {
         return customerNum;
     }
 
-    public void setCustomerNum(int customerNum) {
+    public void setCustomerNum(Long customerNum) {
         this.customerNum = customerNum;
     }
 
-    public String getAccountNum() {
+    public Long getAccountNum() {
         return accountNum;
     }
 
-    public void setAccountNum(String accountNum) {
+    public void setAccountNum(Long accountNum) {
         this.accountNum = accountNum;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 }
